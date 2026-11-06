@@ -50,6 +50,17 @@ main>section{min-width:0}
 .t.alarm figcaption{background:var(--red);color:var(--ink)}
 @keyframes alarm{50%{outline-color:transparent}}
 
+/* detector overlay */
+.det{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:transform .6s var(--ease)}
+.t:hover .det{transform:scale(1.07)}
+.det rect:not(.d-tag),.det polygon{fill:none;stroke-width:2.5px;vector-effect:non-scaling-stroke}
+.d-a rect:not(.d-tag),.d-a polygon{stroke:var(--red)}
+.d-g rect:not(.d-tag),.d-g polygon{stroke:#b8ff2e}
+.d-a polygon{fill:rgba(255,59,36,.18)}
+.d-a .d-tag{fill:var(--red)}.d-g .d-tag{fill:#b8ff2e}
+.det text{font-family:var(--f-t);font-weight:600;fill:var(--ink)}
+.t:not(.z-big) .d-tag,.t:not(.z-big) .det text{display:none}
+
 /* hero wall */
 .wall{height:calc(100svh - 60px);min-height:600px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:repeat(4,minmax(0,1fr));gap:var(--g)}
 .l{display:grid;place-items:center;background:var(--red);color:var(--ink);font:700 clamp(58px,10vw,160px)/1 var(--f-d);min-height:0;overflow:hidden}
@@ -67,9 +78,10 @@ h1{font-size:var(--s-1);line-height:1.04}
 .pult-text h2{font-size:clamp(24px,2.4vw,36px)}
 .console{display:grid;grid-template-columns:minmax(0,1fr) 300px;grid-template-rows:auto auto;background:var(--tile);color:#fff;font-size:14px;overflow:hidden;min-width:0}
 .c-stage{position:relative;min-width:0}
-.c-frame{aspect-ratio:16/9;overflow:hidden;background:#000}
+.c-frame{aspect-ratio:16/9;overflow:hidden;background:#000;position:relative}
 .c-frame img{width:100%;height:100%;object-fit:cover;animation:drift 14s ease-in-out infinite alternate}
-.c-frame.swap img{animation:swap .55s var(--ease) both,drift 14s ease-in-out .55s infinite alternate}
+.c-frame .det{animation:drift 14s ease-in-out infinite alternate}
+.c-frame.swap img,.c-frame.swap .det{animation:swap .55s var(--ease) both,drift 14s ease-in-out .55s infinite alternate}
 @keyframes drift{from{transform:scale(1)}to{transform:scale(1.06)}}
 @keyframes swap{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
 .c-bar{display:flex;justify-content:space-between;gap:12px;padding:9px 14px;background:#1e1e1e}

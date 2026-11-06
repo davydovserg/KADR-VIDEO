@@ -37,7 +37,7 @@
   <div class="l" aria-hidden="true">K</div>
   <figure data-ui class="t"><img src="assets/img/machine.jpg" width="598" height="399" alt="Оператор у станка в рамках детектора" fetchpriority="high"><figcaption>Станок</figcaption></figure>
   <div class="l l2" aria-hidden="true">A</div>
-  <figure data-ui class="t alarm"><img src="assets/img/fall-after.jpg" width="1112" height="701" alt="Детектор выделил упавшего сотрудника красной рамкой"><figcaption>Падение</figcaption></figure>
+  <figure data-ui data-det="fall" class="t alarm"><img src="assets/img/fall-clean.jpg" width="1600" height="893" alt="Сотрудник упал на рабочей площадке, система выделила его красной рамкой"><figcaption>Падение</figcaption></figure>
   <div class="l" aria-hidden="true">D</div>
   <div class="l l2" aria-hidden="true">R</div>
 
@@ -48,11 +48,11 @@
   </div>
   <figure data-ui class="t"><img src="assets/img/conveyor-b.jpg" width="704" height="486" alt="Коробки на конвейере проходят контрольные зоны"><figcaption>Склад</figcaption></figure>
 
-  <figure data-ui class="t"><img src="assets/img/zone-out.jpg" width="444" height="360" alt="Сотрудник рядом с контуром опасной зоны"><figcaption>Опасная зона</figcaption></figure>
+  <figure data-ui data-det="rotor" class="t"><img src="assets/img/rig-rotor.jpg" width="620" height="440" alt="Контур опасной зоны вокруг ротора на буровой"><figcaption>Опасная зона</figcaption></figure>
   <figure data-ui class="t x"><img src="assets/img/car-zone.jpg" width="640" height="360" alt="Автомобиль в контролируемой зоне"><figcaption>Периметр</figcaption></figure>
   <figure data-ui class="t"><img src="assets/img/ppe-office.jpg" width="572" height="360" alt="Сотрудник надевает каску, система отслеживает СИЗ"><figcaption>Каска</figcaption></figure>
   <figure data-ui class="t x"><img src="assets/img/smoke.jpg" width="675" height="450" alt="Склад сверху, сигнал о дыме"><figcaption>Дым</figcaption></figure>
-  <figure data-ui class="t"><img src="assets/img/ppe-rotor.jpg" width="440" height="360" alt="Рабочие на буровой, система отмечает средства защиты"><figcaption>СИЗ</figcaption></figure>
+  <figure data-ui data-det="rig" class="t"><img src="assets/img/rig-floor.jpg" width="1600" height="893" alt="Рабочие на буровой, система отмечает каски"><figcaption>СИЗ</figcaption></figure>
   <figure data-ui class="t"><img src="assets/img/factory.jpg" width="936" height="624" alt="Цех, система выделила двух сотрудников в жилетах"><figcaption>Цех</figcaption></figure>
 
   <figure data-ui class="t x"><img src="assets/img/operator.jpg" width="598" height="446" alt="Сотрудник на производственной линии"><figcaption>Линия</figcaption></figure>
@@ -190,12 +190,12 @@
       <p><b>87%</b><span>качество распознавания очков</span></p>
     </div>
   </div>
-  <figure data-ui class="t z-big"><img src="assets/img/fall-after.jpg" width="1112" height="701" loading="lazy" alt="Детектор выделил упавшего сотрудника красной рамкой и построил скелетную модель"><figcaption>Падение: событие о нештатной ситуации</figcaption></figure>
-  <figure data-ui class="t"><img src="assets/img/zone-out.jpg" width="444" height="360" loading="lazy" alt="Сотрудник у ротора, рядом выделена опасная зона"><figcaption>Опасная зона</figcaption></figure>
-  <figure data-ui class="t"><img src="assets/img/ppe-rotor.jpg" width="440" height="360" loading="lazy" alt="Рабочие на буровой, система отмечает средства защиты"><figcaption>СИЗ на объекте</figcaption></figure>
+  <figure data-ui data-det="fall" class="t z-big"><img src="assets/img/fall-clean.jpg" width="1600" height="893" loading="lazy" alt="Система выделила упавшего сотрудника красной рамкой"><figcaption>Падение: событие о нештатной ситуации</figcaption></figure>
+  <figure data-ui data-det="rotor" class="t"><img src="assets/img/rig-rotor.jpg" width="620" height="440" loading="lazy" alt="Контур опасной зоны вокруг ротора"><figcaption>Опасная зона</figcaption></figure>
+  <figure data-ui data-det="crew" class="t"><img src="assets/img/rig-crew.jpg" width="770" height="600" loading="lazy" alt="Двое рабочих в касках на буровой"><figcaption>СИЗ на объекте</figcaption></figure>
   <figure data-ui class="t"><img src="assets/img/ppe-office.jpg" width="572" height="360" loading="lazy" alt="Сотрудник надевает каску"><figcaption>Каска</figcaption></figure>
   <figure data-ui class="t"><img src="assets/img/zone-red.jpg" width="444" height="360" loading="lazy" alt="Контроль присутствия сотрудника в закрытой зоне"><figcaption>Закрытая зона</figcaption></figure>
-  <figure data-ui class="t"><img src="assets/img/ppe-worker.jpg" width="476" height="360" loading="lazy" alt="Сотрудник в каске в рамке детектора"><figcaption>Жилет, перчатки</figcaption></figure>
+  <figure data-ui data-det="worker" class="t"><img src="assets/img/rig-worker.jpg" width="580" height="440" loading="lazy" alt="Рабочий в каске и перчатках на буровой"><figcaption>Каска, перчатки</figcaption></figure>
   <figure data-ui class="t"><img src="assets/img/zone-steam.jpg" width="476" height="360" loading="lazy" alt="Сотрудник при слабой видимости, рядом пар"><figcaption>Перемещение</figcaption></figure>
 </section>
 
@@ -233,7 +233,7 @@
     </div>
   </article>
   <article class="s-card">
-    <img class="r" src="assets/img/rig.jpg" width="650" height="682" loading="lazy" alt="Буровая установка на месторождении">
+    <img class="r" src="assets/img/rig-floor.jpg" width="1600" height="893" loading="lazy" alt="Рабочая площадка буровой установки">
     <div>
       <h3 class="r">Опасное производство</h3>
       <p class="r">Обучение на&nbsp;вашем видеоархиве: СИЗ и&nbsp;нештатные ситуации. Интеграция с&nbsp;громкоговорящей связью и&nbsp;телефонией.</p>
@@ -331,7 +331,7 @@
 <footer class="foot">
   <span>KADR studio, видеоаналитика на производстве</span>
   <span class="foot-links"><a href="#pult">Пульт</a><a href="#price">Стоимость</a><a href="#top">Наверх</a></span>
-  <span class="foot-r">Концепт сайта · 2026 · Сергей</span>
+  <span class="foot-r">Концепт сайта, кадры демонстрационные · 2026 · Сергей</span>
 </footer>
 
 <script src="app.js"></script>

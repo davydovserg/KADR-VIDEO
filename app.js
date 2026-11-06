@@ -23,15 +23,51 @@
     $$('.r').forEach(function(el){io.observe(el)});
   }
 
+  /* ---------- detector overlays, drawn in code so they stay sharp at any size ---------- */
+  var DETS={
+    fall:{vb:[2000,1116],items:[{r:[640,385,1235,630],t:'Падение человека',c:'a'}]},
+    rig:{vb:[2000,1116],items:[{p:'950,600 1215,590 1265,765 900,775',t:'Опасная зона',c:'a'},{r:[555,370,150,255],t:'Каска',c:'g'},{r:[1265,410,165,275],t:'Каска',c:'g'},{r:[1545,450,165,385],t:'Каска',c:'g'}]},
+    rotor:{vb:[620,440],items:[{p:'120,80 390,70 440,245 70,255',t:'Опасная зона',c:'a'}]},
+    crew:{vb:[770,600],items:[{r:[135,110,165,275],t:'Каска',c:'g'},{r:[415,150,165,385],t:'Каска',c:'g'}]},
+    worker:{vb:[580,440],items:[{r:[125,90,150,255],t:'Каска',c:'g'}]}
+  };
+  function detSvg(key){
+    var d=DETS[key], NS='http://www.w3.org/2000/svg', s=document.createElementNS(NS,'svg');
+    s.setAttribute('class','det'); s.setAttribute('aria-hidden','true');
+    s.setAttribute('viewBox','0 0 '+d.vb[0]+' '+d.vb[1]); s.setAttribute('preserveAspectRatio','xMidYMid slice');
+    var fs=d.vb[0]*.021;
+    d.items.forEach(function(it){
+      var g=document.createElementNS(NS,'g'), x, y, shape;
+      g.setAttribute('class','d-'+it.c);
+      if(it.r){
+        shape=document.createElementNS(NS,'rect');
+        shape.setAttribute('x',it.r[0]); shape.setAttribute('y',it.r[1]); shape.setAttribute('width',it.r[2]); shape.setAttribute('height',it.r[3]);
+        x=it.r[0]; y=it.r[1];
+      } else {
+        shape=document.createElementNS(NS,'polygon'); shape.setAttribute('points',it.p);
+        var first=it.p.split(' ')[0].split(','); x=+first[0]; y=+first[1];
+      }
+      g.appendChild(shape);
+      var w=it.t.length*fs*.6+fs*.8, h=fs*1.5;
+      var bg=document.createElementNS(NS,'rect'); bg.setAttribute('class','d-tag');
+      bg.setAttribute('x',x); bg.setAttribute('y',Math.max(0,y-h)); bg.setAttribute('width',w); bg.setAttribute('height',h);
+      var t=document.createElementNS(NS,'text'); t.textContent=it.t;
+      t.setAttribute('x',x+fs*.4); t.setAttribute('y',Math.max(0,y-h)+fs*1.08); t.setAttribute('font-size',fs);
+      g.appendChild(bg); g.appendChild(t); s.appendChild(g);
+    });
+    return s;
+  }
+  $$('[data-det]').forEach(function(f){ f.appendChild(detSvg(f.getAttribute('data-det'))) });
+
   /* ---------- console: the live thing ---------- */
   var SCENES = [
     {img:'machine',w:598,h:399,cam:'Цех · станок',alt:'Кадр с камеры: оператор у станка, система выделила человека, каску и рабочую зону',
       ev:[['Оператор на месте','Время операции замеряется'],['Простой станка','Отмечен для отчёта план-факт']]},
-    {img:'ppe-rotor',w:440,h:360,cam:'Буровая · площадка',alt:'Кадр с буровой: система отмечает средства защиты сотрудников',
+    {img:'rig-floor',det:'rig',w:1600,h:893,cam:'Буровая · площадка',alt:'Кадр с буровой: система отмечает средства защиты сотрудников',
       ev:[['Нет средства защиты','Событие о нарушении'],['Каска на месте','Качество распознавания 93%']]},
     {img:'zone-out',w:444,h:360,cam:'Буровая · ротор',alt:'Кадр у ротора: контур опасной зоны и сотрудник рядом с ней',
       ev:[['Человек в опасной зоне','Сотрудник внутри контура'],['Перемещение по объекту','Положение людей обновлено']]},
-    {img:'fall-after',w:1112,h:701,cam:'Буровая · настил',alt:'Детектор выделил упавшего сотрудника красной рамкой и скелетной моделью',
+    {img:'fall-clean',det:'fall',w:1600,h:893,cam:'Буровая · настил',alt:'Детектор выделил упавшего сотрудника красной рамкой и скелетной моделью',
       ev:[['Падение человека','Событие о нештатной ситуации'],['Оповещение','Передано по громкой связи']]},
     {img:'flame',w:640,h:360,cam:'Территория · склад',alt:'Система выделила пламя и дым на территории объекта',
       ev:[['Пламя и дым','Раньше традиционных датчиков'],['Оповещение сотрудников','Событие передано в систему здания']]},
@@ -68,6 +104,8 @@
     cur=s;
     var d=SCENES[s];
     img.src='assets/img/'+d.img+'.jpg'; img.width=d.w; img.height=d.h; img.alt=d.alt;
+    var oldSvg=$('svg',frame); if(oldSvg) frame.removeChild(oldSvg);
+    if(d.det) frame.appendChild(detSvg(d.det));
     cam.textContent=d.cam;
     frame.classList.remove('swap'); void frame.offsetWidth; frame.classList.add('swap');
     tabs.forEach(function(b,i){b.setAttribute('aria-pressed',i===s?'true':'false')});
